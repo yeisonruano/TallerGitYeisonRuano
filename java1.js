@@ -1,25 +1,55 @@
-function traducirNumeroALetras(numero) {
-    const unidades = ['cero', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
-    const decenas = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
-    const especiales = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
+// Función para traducir el número a texto en espanol
+function traducir() {
+    const numero = parseInt(document.getElementById('numero').value);
+    const resultado = document.getElementById('resultado');
 
-    if (numero < 10) {
-        return unidades[numero];
-    } else if (numero < 20) {
-        return especiales[numero - 10];
-    } else if (numero < 100) {
-        const decena = Math.floor(numero / 10);
-        const unidad = numero % 10;
-        return unidad === 0 ? decenas[decena] : `${decenas[decena]} y ${unidades[unidad]}`;
-    } else if (numero === 100) {
-        return 'cien';
+    const traducciones = [
+        "", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE",
+        "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE",
+        "DIECIOCHO", "DIECINUEVE", "VEINTE", "VEINTIUNO", "VEINTIDOS", "VEINTITRES",
+        "VEINTICUATRO", "VEINTICINCO", "VEINTISEIS", "VEINTISIETE", "VEINTIOCHO", "VEINTINUEVE",
+        "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA", "CIEN"
+    ];
+
+    if (numero >= 1 && numero <= 100) {
+        resultado.innerText = `${traducciones[numero]}`;
     } else {
-        return 'Número fuera de rango';
+        resultado.innerText = "Número fuera de rango";
     }
 }
 
-function traducir() {
+// Función para traducir el número a texto en inglés
+function traducirIngles() {
     const numero = parseInt(document.getElementById('numero').value);
-    const resultado = traducirNumeroALetras(numero);
-    document.getElementById('resultado').textContent = resultado;
+    const resultado = document.getElementById('resultado');
+
+    const traduccionesIngles = [
+        "", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE",
+        "TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN",
+        "SEVENTEEN", "EIGHTEEN", "NINETEEN", "TWENTY", "TWENTY-ONE", "TWENTY-TWO",
+        "TWENTY-THREE", "TWENTY-FOUR", "TWENTY-FIVE", "TWENTY-SIX", "TWENTY-SEVEN",
+        "TWENTY-EIGHT", "TWENTY-NINE", "THIRTY", "FORTY", "FIFTY", "SIXTY", "SEVENTY",
+        "EIGHTY", "NINETY", "HUNDRED"
+    ];
+
+    if (numero >= 1 && numero <= 100) {
+        let textoEsp = traducirNumeroEnEspanol(numero);
+        let textoIngles = traduccionesIngles[numero];
+        resultado.innerText = `${numero} – ${textoEsp} – ${textoIngles}`;
+    } else {
+        resultado.innerText = "Number out of range";
+    }
+}
+
+// Función auxiliar para traducir el número a texto en espanol
+function traducirNumeroEnEspanol(numero) {
+    const traducciones = [
+        "", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE",
+        "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE",
+        "DIECIOCHO", "DIECINUEVE", "VEINTE", "VEINTIUNO", "VEINTIDOS", "VEINTITRES",
+        "VEINTICUATRO", "VEINTICINCO", "VEINTISEIS", "VEINTISIETE", "VEINTIOCHO", "VEINTINUEVE",
+        "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA", "CIEN"
+    ];
+
+    return numero >= 1 && numero <= 100 ? traducciones[numero] : "Número fuera de rango";
 }
